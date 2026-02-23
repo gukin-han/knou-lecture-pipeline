@@ -1,0 +1,237 @@
+/* ── Reset & Variables ───────────────────────────────────────────── */
+:root {
+  --primary:       #4f46e5;
+  --primary-dark:  #3730a3;
+  --primary-light: #e0e7ff;
+  --success:       #059669;
+  --success-bg:    #d1fae5;
+  --warning:       #d97706;
+  --warning-bg:    #fef3c7;
+  --error:         #dc2626;
+  --error-bg:      #fee2e2;
+  --info:          #0284c7;
+  --info-bg:       #e0f2fe;
+
+  --bg:       #f1f5f9;
+  --card-bg:  #ffffff;
+  --border:   #e2e8f0;
+  --text:     #0f172a;
+  --muted:    #64748b;
+  --radius:   14px;
+  --shadow:   0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:0 4px 12px rgba(0,0,0,.1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2.5rem 1rem 4rem;
+  line-height: 1.6;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────── */
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 2.25rem;
+}
+.logo { font-size: 2.5rem; margin-bottom: .5rem; }
+header h1 {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -.02em;
+  margin-bottom: .4rem;
+}
+header p { color: var(--muted); font-size: .93rem; }
+
+/* ── Drop Zone ───────────────────────────────────────────────────── */
+.drop-zone {
+  background: var(--card-bg);
+  border: 2.5px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, transform .15s;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.75rem;
+  outline: none;
+}
+.drop-zone:hover,
+.drop-zone:focus-visible {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.drop-zone.drag-over {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: scale(1.015);
+  box-shadow: var(--shadow-md);
+}
+.drop-zone-icon  { font-size: 2.75rem; margin-bottom: .75rem; }
+.drop-zone-title { font-size: 1.05rem; font-weight: 600; margin-bottom: .3rem; }
+.drop-zone-sub   { color: var(--muted); font-size: .9rem; }
+.drop-zone-sub strong { color: var(--primary); }
+.drop-zone-formats {
+  margin-top: .75rem;
+  font-size: .78rem;
+  color: var(--muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* ── Job List ────────────────────────────────────────────────────── */
+.job-list { display: flex; flex-direction: column; gap: .85rem; }
+
+/* ── Job Card ────────────────────────────────────────────────────── */
+.job-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1.3rem 1.2rem;
+  border-left: 4px solid var(--border);
+  transition: border-color .35s;
+  animation: slide-in .25s ease;
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Border accent by stage */
+.job-card[data-status="queued"]      { border-left-color: var(--border); }
+.job-card[data-status="transcribing"]{ border-left-color: var(--warning); }
+.job-card[data-status="cleaning"]    { border-left-color: #818cf8; }
+.job-card[data-status="structuring"] { border-left-color: var(--primary); }
+.job-card[data-status="done"]        { border-left-color: var(--success); }
+.job-card[data-status="failed"]      { border-left-color: var(--error); }
+
+/* ── Card Header ─────────────────────────────────────────────────── */
+.job-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .8rem;
+}
+.job-filename {
+  font-weight: 600;
+  font-size: .95rem;
+  word-break: break-all;
+  flex: 1;
+}
+.job-size {
+  font-size: .78rem;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-top: .1rem;
+}
+
+/* ── Stage Badge ─────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .22rem .65rem;
+  border-radius: 99px;
+  font-size: .75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-queued       { background: #f1f5f9; color: var(--muted); }
+.badge-transcribing { background: var(--warning-bg); color: var(--warning); }
+.badge-cleaning     { background: var(--info-bg);    color: var(--info); }
+.badge-structuring  { background: var(--primary-light); color: var(--primary-dark); }
+.badge-done         { background: var(--success-bg); color: var(--success); }
+.badge-failed       { background: var(--error-bg);   color: var(--error); }
+
+.badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.badge-transcribing .dot,
+.badge-cleaning .dot,
+.badge-structuring .dot { animation: pulse .9s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .35; }
+}
+
+/* ── Progress Bar ────────────────────────────────────────────────── */
+.progress-wrap {
+  margin-bottom: .5rem;
+}
+.progress-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #818cf8, var(--primary));
+  transition: width .5s ease;
+  width: 0%;
+}
+.job-card[data-status="done"] .progress-fill {
+  background: linear-gradient(90deg, #34d399, var(--success));
+}
+.job-card[data-status="failed"] .progress-fill {
+  background: var(--error);
+}
+
+/* ── Message & Error ─────────────────────────────────────────────── */
+.job-message {
+  font-size: .82rem;
+  color: var(--muted);
+  margin-top: .3rem;
+  min-height: 1.1rem;
+}
+.job-error {
+  font-size: .82rem;
+  color: var(--error);
+  margin-top: .4rem;
+  padding: .5rem .75rem;
+  background: var(--error-bg);
+  border-radius: 8px;
+  word-break: break-word;
+}
+
+/* ── Download Button ─────────────────────────────────────────────── */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .85rem;
+  padding: .55rem 1.2rem;
+  background: var(--success);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  text-decoration: none;
+}
+.btn-download:hover  { background: #047857; transform: translateY(-1px); }
+.btn-download:active { transform: translateY(0); }
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .drop-zone { padding: 2rem 1.25rem; }
+  header h1  { font-size: 1.35rem; }
+  .job-header { flex-direction: column; gap: .4rem; }
+}

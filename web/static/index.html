@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KNOU 강의 변환기</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="logo">📚</div>
+      <h1>KNOU 강의 변환기</h1>
+      <p>MP3 강의 파일을 마크다운 문서로 자동 변환합니다</p>
+    </header>
+
+    <div class="drop-zone" id="dropZone" role="button" tabindex="0"
+         aria-label="오디오 파일을 드래그하거나 클릭하여 업로드">
+      <div class="drop-zone-icon">🎵</div>
+      <p class="drop-zone-title">파일을 여기에 드래그하세요</p>
+      <p class="drop-zone-sub">또는 <strong>클릭하여 파일 선택</strong></p>
+      <p class="drop-zone-formats">MP3 · WAV · M4A · FLAC · OGG</p>
+      <input type="file" id="fileInput" accept=".mp3,.wav,.m4a,.flac,.ogg,.opus" multiple hidden />
+    </div>
+
+    <div id="jobList" class="job-list" aria-live="polite"></div>
+
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

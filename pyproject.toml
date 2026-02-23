@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "knou-lecture-pipeline"
+version = "0.1.0"
+description = "KNOU lecture MP3 → Markdown conversion pipeline"
+requires-python = ">=3.11"
+dependencies = [
+    "faster-whisper>=1.0.0",
+    "anthropic>=0.40.0",
+    "openai>=1.50.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "tenacity>=8.2.0",
+    "watchfiles>=0.21.0",
+    "click>=8.1.0",
+]
+
+[project.scripts]
+knou-pipeline = "watcher.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["config*", "pipeline*", "watcher*", "utils*"]

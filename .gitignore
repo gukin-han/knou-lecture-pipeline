@@ -1,0 +1,27 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Data (do not commit audio or generated docs)
+data/input/
+data/output/
+data/intermediate/
+data/processed/
+data/failed/
+logs/
+
+# IDE
+.DS_Store
+.idea/
+.vscode/

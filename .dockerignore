@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Environment (never bake secrets into the image)
+.env
+
+# Data & logs (mounted as volumes at runtime)
+data/
+logs/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.DS_Store
+.idea/
+.vscode/

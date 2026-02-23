@@ -1,0 +1,38 @@
+services:
+  pipeline:
+    build: .
+    image: knou-pipeline:latest
+    container_name: knou-pipeline
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      # Persist data directories on the host
+      - ./data:/app/data
+      - ./logs:/app/logs
+      # Cache the Whisper model so it isn't re-downloaded on every restart
+      - whisper-cache:/root/.cache/huggingface
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  # ── Optional: GPU support (NVIDIA) ────────────────────────────────
+  # Uncomment the `deploy` block below and set WHISPER_DEVICE=cuda
+  # in your .env to enable GPU acceleration.
+  #
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: 1
+  #             capabilities: [gpu]
+
+volumes:
+  whisper-cache:
+    driver: local
