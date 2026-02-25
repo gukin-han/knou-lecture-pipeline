@@ -152,6 +152,12 @@ gh auth switch --user gukin-han
    - **역사 타임라인** 추가 (Mermaid timeline)
 3. 커밋·푸시
 
+### Mermaid 줄바꿈 규칙
+
+- 노드 라벨 내 줄바꿈에 `\n`을 사용하지 말 것 — GitHub 렌더러에서 그대로 노출됨
+- 반드시 `<br>`을 사용할 것
+- 예: `["TLS 1.3<br>(HTTPS)"]` (O) / `["TLS 1.3\n(HTTPS)"]` (X)
+
 ### Mermaid 다이어그램 선택 기준
 
 | 상황 | 다이어그램 종류 |
